@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/video.js/dist/video-js.css">
+    <link rel="stylesheet" href="/videojs-ima/dist/videojs.ima.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs-contrib-ads.css"
+        integrity="sha512-0gIqgiX1dWTChdWUl8XGIBDFvLo7aTvmd6FAhJjzWx5bzYsCJTiPJLKqLF3q31IN4Kfrc0NbTO+EthoT6O0olQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="video.js/dist/video.js"></script>
+    <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+    <script src="videojs-ima/dist/videojs.ima.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs-contrib-ads.js"
+        integrity="sha512-XjyyAijQGlXZET35toG8igvVs8HvfVgKXGnbfAs2EpZ0o8vjJoIrxL9RBBQbQjzAODIe0jvWelFfZOA3Z/vdWg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="wrap-adv" style="width: 640px; height: 320px">
+        <video id='adv' width="640px" height="320px" class="video-js" muted></video>
+    </div>
+    <script>
+        var adv = window.parent.document.getElementById('adv')
+        var videoOptions = {
+            controls: true,
+            width: 640,
+            height: 320,
+            sources: [{
+                src: 'https://cdn-player.urekamedia.com/hls/vietnamtravel/vietnam-travela.m3u8',
+                type: 'application/x-mpegURL',
+            }],
+        }
+        var player = videojs(adv, videoOptions)
+
+        var options = {
+            adTagUrl: 'https://pubads.g.doubleclick.net/gampad/ads?' +
+                'sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&' +
+                'impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&' +
+                'cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator='
+        };
+
+        player.ima(options);
+        player.play()
+    </script>
+
+    <script>
+        var $window = $(window);
+        var $videoWrap = $('.video-wrap');
+        var $video = $('.video');
+        var videoHeight = $video.outerHeight();
+
+        $window.on('scroll', function () {
+            var windowScrollTop = $window.scrollTop();
+            var videoBottom = videoHeight + $videoWrap.offset().top;
+            console.log(windowScrollTop)
+            console.log(videoBottom)
+            if (windowScrollTop > videoBottom) {
+                $videoWrap.height(videoHeight);
+                $video.addClass('stuck');
+            } else {
+                $videoWrap.height('auto');
+                $video.removeClass('stuck');
+            }
+        })
+    </script>
+</body>
+
+</html>

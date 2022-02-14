@@ -1,0 +1,1 @@
+ngrok http -host-header=rewrite dev.player.local:80
