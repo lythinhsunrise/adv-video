@@ -45,8 +45,8 @@ var firstPlay = true
 
 $window.addEventListener("scroll", function () {
   var windowScrollTop = $window.scrollY
-  console.log(windowScrollTop)
-  console.log(videoBottom)
+  // console.log(windowScrollTop)
+  // console.log(videoBottom)
   if (windowScrollTop > halfVideoWrap && firstPlay) {
     player.play()
     firstPlay = false
