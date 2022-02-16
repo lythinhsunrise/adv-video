@@ -8,9 +8,32 @@
     <script src="video.js/dist/video.js"></script>
     <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
     <script src="videojs-ima/dist/videojs.ima.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs-contrib-ads.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs-contrib-ads.js"></script> -->
+    <script src="videojs-contrib-ads/dist/videojs-contrib-ads.js"></script>
 </head>
 <body>
-    <script type="text/javascript" src="playerima.js"></script>
+    <!-- <script type="text/javascript" src="playerima.js"></script> -->
+    <script type="text/javascript">
+        let config = {
+            id: '#ad-container',
+            autoplay: true,
+            floating: true,
+            video: 'https://cdn-player.urekamedia.com/hls/vietnamtravel/vietnam-travela.m3u8',
+            type: 'application/x-mpegURL',
+            vast: 'https://pubads.g.doubleclick.net/gampad/ads?' +
+                  'sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&' +
+                  'impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&' +
+                  'cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator=',
+        };
+        const script = document.createElement('script');
+        script.src = 'playerima.js';
+        script.type = 'text/javascript';
+        script.addEventListener('load', () => {
+            let player = new Uplayer(config);
+            console.log(player)
+            player.init();
+        })
+        window.document.getElementsByTagName('head')[0].append(script);
+    </script>
 </body>
 </html>
